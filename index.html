@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <!-- interactive-widget lets the page resize when a phone keyboard opens (RSVP form) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f1d9c8">
+  <title>You’re invited! · Gender reveal</title>
+  <meta name="description" content="You’re invited to our gender reveal. Step into the nursery for the date, directions, dress code, RSVP and more.">
+  <meta property="og:title" content="You’re invited! · Gender reveal">
+  <meta property="og:description" content="A little love. A big surprise. Step into the nursery for all the details.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Fonts: Fraunces (headings) + Lora (body) from Google Fonts. Falls back to Georgia/serif. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..900&family=Lora:wght@400..700&display=swap">
+
+  <link rel="preload" as="image" href="assets/images/room.webp" type="image/webp">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Soft blurred copy of the room fills the space around the invitation on desktop -->
+  <div class="backdrop-art" aria-hidden="true"></div>
+
+  <main class="stage" id="stage">
+    <h1 class="sr-only">Gender reveal invitation. Explore the nursery to find the details.</h1>
+
+    <div class="room" id="room">
+      <img class="room__img" src="assets/images/room.webp" width="941" height="1672"
+           alt="A cosy pixel-art nursery with a calendar, hanging mobile, teddy bear, photo frame, crib, folded clothes and a gift box.">
+      <!-- Transparent buttons are created here by js/app.js from js/hotspots.js -->
+      <div class="hotspots" id="hotspots"></div>
+    </div>
+  </main>
+
+  <!-- Discreet hint, shown for a few seconds after entering -->
+  <p class="hint" id="hint" role="status" aria-live="polite"></p>
+
+  <!-- OPENING POPUP — real text and a real button; the room behind is dimmed and inert while open -->
+  <dialog class="dlg dlg--center" id="welcome" aria-labelledby="welcome-title" aria-describedby="welcome-msg">
+    <div class="welcome" tabindex="-1">
+      <div class="welcome__shadow">
+        <div class="pf welcome__l1">
+          <div class="pf welcome__l2">
+            <div class="pf welcome__l3">
+              <div class="gingham-band gingham-band--top" aria-hidden="true">
+                <span class="corner corner--tl"><span data-sprite="heart" data-tone="red" data-px="2"></span></span>
+                <span class="corner corner--tr"><span data-sprite="heart" data-tone="red" data-px="2"></span></span>
+              </div>
+
+              <div class="welcome__body">
+                <svg class="arc" viewBox="0 0 300 52" focusable="false">
+                  <defs><path id="arc-path" d="M 14 46 Q 150 2 286 46"/></defs>
+                  <text><textPath href="#arc-path" startOffset="50%" text-anchor="middle" id="welcome-eyebrow">A LITTLE SURPRISE AWAITS</textPath></text>
+                </svg>
+
+                <span class="deco-top" aria-hidden="true" data-sprite="heart" data-tone="red" data-px="4"></span>
+
+                <div class="welcome__hero">
+                  <!-- scattered sprites beside the text, purely decorative -->
+                  <span class="deco deco--s1" aria-hidden="true" data-sprite="star" data-px="3"></span>
+                  <span class="deco deco--s2" aria-hidden="true" data-sprite="star" data-px="3"></span>
+                  <span class="deco deco--s3" aria-hidden="true" data-sprite="star" data-px="3"></span>
+                  <span class="deco deco--s4" aria-hidden="true" data-sprite="star" data-px="3"></span>
+                  <span class="deco deco--h1" aria-hidden="true" data-sprite="heart" data-tone="pink" data-px="2"></span>
+                  <span class="deco deco--h2" aria-hidden="true" data-sprite="heart" data-tone="blue" data-px="2"></span>
+                  <span class="deco deco--h3" aria-hidden="true" data-sprite="heart" data-tone="blue" data-px="2"></span>
+                  <span class="deco deco--h4" aria-hidden="true" data-sprite="heart" data-tone="pink" data-px="2"></span>
+                  <span class="deco deco--h5" aria-hidden="true" data-sprite="heart" data-tone="pink" data-px="2"></span>
+                  <span class="deco deco--h6" aria-hidden="true" data-sprite="heart" data-tone="blue" data-px="2"></span>
+
+                  <h2 class="welcome__title" id="welcome-title">You’re invited!</h2>
+
+                  <div class="divider" aria-hidden="true">
+                    <span></span><span data-sprite="heart" data-tone="pink" data-px="2"></span><span></span>
+                  </div>
+
+                  <p class="welcome__msg" id="welcome-msg">Join us for a special day as we reveal our little one’s big surprise.</p>
+                </div>
+                <p class="welcome__tag" id="welcome-tag">A little love. A big surprise.</p>
+
+                <button type="button" class="btn-gingham" id="welcome-enter">
+                  <span class="btn-gingham__heart" aria-hidden="true" data-sprite="heart" data-tone="red" data-px="2"></span>
+                  <span class="btn-gingham__label" id="welcome-enter-label">Enter the nursery</span>
+                  <span class="btn-gingham__arrow" aria-hidden="true">→</span>
+                  <span class="btn-gingham__heart" aria-hidden="true" data-sprite="heart" data-tone="red" data-px="2"></span>
+                </button>
+              </div>
+
+              <div class="gingham-band gingham-band--bottom" aria-hidden="true">
+                <span class="corner corner--bl"><span data-sprite="heart" data-tone="red" data-px="2"></span></span>
+                <span class="corner corner--br"><span data-sprite="heart" data-tone="red" data-px="2"></span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <img class="welcome__bow" src="assets/images/bow.png" width="30" height="17" alt="" aria-hidden="true">
+
+    </div>
+  </dialog>
+
+  <!-- Panels (bottom sheets) are created here on first open -->
+  <div id="dialogs"></div>
+
+  <noscript>
+    <div class="noscript">This invitation needs JavaScript to open its panels. Please enable JavaScript or try another browser.</div>
+  </noscript>
+
+  <!-- Plain scripts (no modules) so the page also works if you double-click index.html -->
+  <script src="js/config.js"></script>
+  <script src="js/hotspots.js"></script>
+  <script src="js/sprites.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/panels.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
